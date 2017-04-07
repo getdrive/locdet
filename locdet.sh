@@ -9,10 +9,10 @@ if [ "$lang" = "ru" ];
 fi
 }
 clear
-echo "Welcome to Loc Determinator v.0.1"
+echo "Welcome to Loc Determinater v.0.1"
 echo ""
 RU (){
-read -p "Введите mac-адрес точки доступа без двоеточия": maca
+read -p "Введите mac-адрес точки доступа": maca
 mac=$(echo -n $maca | sed 's/\://g')
 lengh=$(echo -n $mac | wc -c)
 if [ "$lengh" = "12" ]; then 
@@ -27,7 +27,7 @@ bash locdet.sh
 fi
 }
 ENG () {
-read -p "Enter the MAC address of the access point without colon": maca
+read -p "Enter the MAC address of the access point": maca
 mac=$(echo -n $maca | sed 's/\://g')
 lengh=$(echo -n $mac | wc -c)
 if [ "$lengh" = "12" ]; then 
