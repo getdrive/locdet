@@ -24,7 +24,7 @@ lon=$(cat coords.txt | grep -E "(Координаты:|Долгота|Широт
 cat coords.txt
 echo "Ищем координаты на карте. Ждите.."
 
-iceweasel "https://www.google.ru/search?q=$lat,+$lon"2>/dev/null
+iceweasel "https://www.google.com/search?q=$lat,+$lon"2>/dev/null
 rm -rf coords.txt 2>/dev/null
 clear
 exit
@@ -50,7 +50,7 @@ lon=$(cat coords.txt | grep -E "(Coordinates:|Latitude|Longitude|nlatitude|nlong
 cat coords.txt
 echo "We are looking for coordinates on the map. Wait.."
 
-iceweasel "https://www.google.ru/search?q=$lat,+$lon"2>/dev/null
+iceweasel "https://www.google.com/search?q=$lat,+$lon"2>/dev/null
 clear
 rm -rf coords.txt 2>/dev/null
 exit
