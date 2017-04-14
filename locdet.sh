@@ -25,13 +25,15 @@ lat=$(cat coords.txt | grep -E "(Координаты:|Долгота|Широт
 
 lon=$(cat coords.txt | grep -E "(Координаты:|Долгота|Широта|nlatitude|nlongitude)" | sed 's/Координаты://; s/Долгота=//; s/"//; s/"//; s/Широта=//; s/"//; s/"//; s/nlatitude=//; s/nlongitude=//' | cut -d " "  -f3)
 #cat coords.txt
-if [ "$cod" = "404" ]; then
-	echo "Координаты не найдены"
-sleep 2
-else
-echo "Ищем координаты на карте. Ждите.."
+if [[ -s coords.txt && "$cod" = "200" ]]; then
+	echo "Координаты найдены. Ищем координаты на карте. Ждите.."
 
 iceweasel "https://www.google.com/search?q=$lat,+$lon"2>/dev/null
+
+else
+
+echo "Координаты не найдены"
+sleep 2
 fi
 rm -rf coords.txt 2>/dev/null
 clear
@@ -58,14 +60,18 @@ lat=$(cat coords.txt | grep -E "(Coordinates:|Latitude|Longitude|nlatitude|nlong
 
 lon=$(cat coords.txt | grep -E "(Coordinates:|Latitude|Longitude|nlatitude|nlongitude)" | sed 's/Coordinates://; s/Latitude=//; s/"//; s/"//; s/Longitude=//; s/"//; s/"//; s/nlatitude=//; s/nlongitude=//' | cut -d " "  -f3)
 #cat coords.txt
-if [ "$cod" = "404" ]; then
-	echo "No coordinates found"
-sleep 2
-else
-echo "We are looking for coordinates on the map. Wait.."
+if [[ -s coords.txt && "$cod" = "200" ]]; then
+
+echo "Coordinates found. We are looking for coordinates on the map. Wait.."
 
 iceweasel "https://www.google.com/search?q=$lat,+$lon"2>/dev/null
+
+else
+
+	echo "No coordinates found"
+sleep 2
 fi
+
 clear
 rm -rf coords.txt 2>/dev/null
 exit
