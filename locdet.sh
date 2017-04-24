@@ -13,7 +13,7 @@ echo "Welcome to Loc Determinater v.0.3"
 echo ""
 RU (){
 read -p "Введите mac-адрес точки доступа: " maca
-mac=$(echo -n $maca | sed 's/\://g')
+mac=$(echo -n $maca | sed 's/\://g; s/\-//g')
 lengh=$(echo -n $mac | wc -c)
 if [ "$lengh" = "12" ]; then 
 echo ""
@@ -48,7 +48,7 @@ fi
 }
 ENG () {
 read -p "Enter the MAC address of the access point: " maca
-mac=$(echo -n $maca | sed 's/\://g')
+mac=$(echo -n $maca | sed 's/\://g; s/\-//g')
 lengh=$(echo -n $mac | wc -c)
 if [ "$lengh" = "12" ]; then 
 echo ""
