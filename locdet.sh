@@ -9,7 +9,7 @@ if [ "$lang" = "ru" ];
 fi
 }
 clear
-echo "Welcome to Loc Determinater v.0.3"
+echo "Welcome to Loc Determinater v.0.4"
 echo ""
 RU (){
 read -p "Введите mac-адрес точки доступа: " maca
@@ -28,7 +28,7 @@ lon=$(cat coords.txt | grep -E "(Координаты:|Долгота|Широт
 if [[ -s coords.txt && "$cod" = "200" ]]; then
 	echo "Координаты найдены. Ищем координаты на карте. Ждите.."
 sleep 2
-iceweasel "https://www.google.com/search?q=$lat,+$lon" 2> /dev/null
+firefox "https://www.google.com/search?q=$lat,+$lon" 2> /dev/null
 
 else
 
@@ -64,7 +64,7 @@ if [[ -s coords.txt && "$cod" = "200" ]]; then
 
 echo "Coordinates found. We are looking for coordinates on the map. Wait.."
 sleep 2
-iceweasel "https://www.google.com/search?q=$lat,+$lon" 2> /dev/null
+firefox "https://www.google.com/search?q=$lat,+$lon" 2> /dev/null
 
 else
 
