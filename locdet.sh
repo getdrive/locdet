@@ -9,78 +9,72 @@ if [ "$lang" = "ru" ];
 fi
 }
 clear
+
 echo "Welcome to Loc Determinater v.0.5"
 echo ""
+SYS_ARCH()
+{
+sys_arch=$(uname -m)
+	if [ "$sys_arch" = "x86_64" ]; then
+		$PWD/geomac/geomac-x86_64 $mac|awk -F'[|]' '{print $2}'|grep " "|sed s/' '//g >coords
+	else
+		if [ "$sys_arch" = "x86" ]; then
+			$PWD/geomac/geomac-x86 $mac|awk -F'[|]' '{print $2}'|grep " "|sed s/' '//g > $PWD/coords
+fi
+fi
+}
 RU (){
+chmod +x $PWD/geomac/*
 read -p "Введите mac-адрес точки доступа: " maca
 mac=$(echo -n $maca | sed 's/\://g; s/\-//g; s/[ *]//g')
 lengh=$(echo -n $mac | wc -c)
-if [ "$lengh" = "12" ]; then 
-echo ""
-curl -i -s -k -X 'POST' -H 'User-Agent: Dalvik/2.1.0 (Linux; U; Android 5.0.1; Nexus 5 Build/LRX22C)' -H 'Content-Type: application/x-www-form-urlencoded' "https://mobile.maps.yandex.net/cellid_location/?clid=1866854&lac=-1&cellid=-1&operatorid=null&countrycode=null&signalstrength=-1&wifinetworks=$mac:-65&app"| grep -E "(HTTP|coordinates)" | sed 's/^[ \t]*//;s/HTTP/HTTP\//;s/coordinates/Координаты:/; s/latitude/Долгота/; s/longitude/Широта/;s/<//;s/>//; s/\///' > coords.txt
+	if [ "$lengh" = "12" ]; then 
+		echo ""			
+SYS_ARCH
+	else
+		echo "!!!Ввод должен быть 12 символов!!!"
+		sleep 2
+		bash locdet.sh
+	
+lat_lon=$(cat coords| head -n1)
+	if [[ -s coords ]]; then
+		echo "Координаты найдены. Ищем координаты на карте. Ждите.."
+firefox "https://yandex.ru/maps/?mode=search&text=$lat_lon" 2> /dev/null
+	else 
+		echo "Координаты не найдены"
 
-cod=$(cat coords.txt | grep -E "(HTTP)" | cut -d " " -f2)
-
-lat=$(cat coords.txt | grep -E "(Координаты:|Долгота|Широта|nlatitude|nlongitude)" | sed 's/Координаты://; s/Долгота=//; s/"//; s/"//; s/Широта=//; s/"//; s/"//; s/nlatitude=//; s/nlongitude=//' | cut -d " "  -f2)
-
-lon=$(cat coords.txt | grep -E "(Координаты:|Долгота|Широта|nlatitude|nlongitude)" | sed 's/Координаты://; s/Долгота=//; s/"//; s/"//; s/Широта=//; s/"//; s/"//; s/nlatitude=//; s/nlongitude=//' | cut -d " "  -f3)
-#cat coords.txt
-if [[ -s coords.txt && "$cod" = "200" ]]; then
-	echo "Координаты найдены. Ищем координаты на карте. Ждите.."
 sleep 2
-firefox "https://www.google.com/maps?q=$lat,+$lon" 2> /dev/null
-
-else
-
-echo "Координаты не найдены"
-sleep 2
-fi
-rm -rf coords.txt 2> /dev/null
+rm -f coords 2> /dev/null
 clear
 exit
-else
-echo ""
-echo "!!!Ввод должен быть 12 символов!!!"
-sleep 2
-
-bash locdet.sh
+fi
 fi
 }
+
 ENG () {
+chmod +x $PWD/geomac/*
 read -p "Enter the MAC address of the access point: " maca
 mac=$(echo -n $maca | sed 's/\://g; s/\-//g; s/[ *]//g')
 lengh=$(echo -n $mac | wc -c)
-if [ "$lengh" = "12" ]; then 
-echo ""
-curl -i -s -k -X 'POST' -H 'User-Agent: Dalvik/2.1.0 (Linux; U; Android 5.0.1; Nexus 5 Build/LRX22C)' -H 'Content-Type: application/x-www-form-urlencoded' "https://mobile.maps.yandex.net/cellid_location/?clid=1866854&lac=-1&cellid=-1&operatorid=null&countrycode=null&signalstrength=-1&wifinetworks=$mac:-65&app"| grep -E "(HTTP|coordinates)" | sed 's/^[ \t]*//;s/HTTP/HTTP\//;s/coordinates/Coordinates:/;s/latitude/Latitude/;s/longitude/Longitude/;s/<//;s/>//; s/\///' > coords.txt
+	if [ "$lengh" = "12" ]; then 
+		echo ""
+SYS_ARCH
+	else
+		echo "!!!Input must be 12 characters!!!"
+		sleep 2
+		bash locdet.sh
+lat_lon=$(cat coords| head -n1)
+	if [[ -s coords ]]; then
+		echo "Coordinates found. We are looking for coordinates on the map. Wait.."
+firefox "https://yandex.ru/maps/?mode=search&text=$lat_lon" 2> /dev/nul
 
-cod=$(cat coords.txt | grep -E "(HTTP)" | cut -d " " -f2)
-
-lat=$(cat coords.txt | grep -E "(Coordinates:|Latitude|Longitude|nlatitude|nlongitude)" | sed 's/Coordinates://; s/Latitude=//; s/"//; s/"//; s/Longitude=//; s/"//; s/"//; s/nlatitude=//; s/nlongitude=//' | cut -d " "  -f2)
-
-lon=$(cat coords.txt | grep -E "(Coordinates:|Latitude|Longitude|nlatitude|nlongitude)" | sed 's/Coordinates://; s/Latitude=//; s/"//; s/"//; s/Longitude=//; s/"//; s/"//; s/nlatitude=//; s/nlongitude=//' | cut -d " "  -f3)
-#cat coords.txt
-if [[ -s coords.txt && "$cod" = "200" ]]; then
-
-echo "Coordinates found. We are looking for coordinates on the map. Wait.."
-sleep 2
-firefox "https://www.google.com/maps?q=$lat,+$lon" 2> /dev/null
-
-else
-
+	else
 	echo "No coordinates found"
 sleep 2
-fi
-
+rm -f coords 2> /dev/null
 clear
-rm -rf coords.txt 2> /dev/null
 exit
-else
-echo ""
-echo "!!!Input must be 12 characters!!!"
-sleep 2
-
-bash locdet.sh
+fi
 fi
 }
 CHECKLANGUAGE
