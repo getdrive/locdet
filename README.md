@@ -1,4 +1,4 @@
 # Loc Determinater
-Определение координат по mac-адресу беспроводной точки доступа.
+Определение координат по mac-адресу(bssid) беспроводной точки доступа.
 # Google Translate
-Determine the coordinates by the MAC address of the wireless access point.
+Determining coordinates from the mac address(bssid) of a wireless access point.
