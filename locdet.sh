@@ -29,7 +29,7 @@ read -p "Введите mac-адрес точки доступа: " maca
 mac=$(echo -n $maca | sed 's/\://g; s/\-//g; s/[ *]//g')
 lengh=$(echo -n $mac | wc -c)
 	if [ "$lengh" = "12" ]; then 
-		echo ""			
+				
 SYS_ARCH
 	else
 		echo "!!!Ввод должен быть 12 символов!!!"
@@ -56,7 +56,7 @@ read -p "Enter the MAC address of the access point: " maca
 mac=$(echo -n $maca | sed 's/\://g; s/\-//g; s/[ *]//g')
 lengh=$(echo -n $mac | wc -c)
 	if [ "$lengh" = "12" ]; then 
-		echo ""
+		
 SYS_ARCH
 	else
 		echo "!!!Input must be 12 characters!!!"
