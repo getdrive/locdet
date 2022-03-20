@@ -21,8 +21,13 @@ sys_arch=$(uname -m)
 		if [ "$sys_arch" = "i386" ] OR [ "$sys_arch" = "i686" ]; then
 			$PWD/geomac/geomac-x86 $mac|awk -F'[|]' '{print $2}'|grep " "|sed s/' '//g > $PWD/coords
 	else 
-		echo "Программа работает на х86_64 и i386(i686) архитектурах"
-		exit
+		if [ "$lang" = "ru" ]; then		
+			echo "Программа работает на х86_64 и i386(i686) архитектурах"
+			exit
+	else
+			echo "The program only works on x86_64 and i386(i686) architectures"
+			exit
+fi
 fi
 fi
 }
