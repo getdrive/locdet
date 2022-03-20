@@ -39,12 +39,12 @@ SYS_ARCH
 lat_lon=$(cat coords| head -n1)
 	if [[ -s coords ]]; then
 		echo "Координаты найдены. Ищем координаты на карте. Ждите.."
+		rm -f coords 2> /dev/null
 firefox "https://yandex.ru/maps/?mode=search&text=$lat_lon" 2> /dev/null
 	else 
 		echo "Координаты не найдены"
 
 sleep 2
-rm -f coords 2> /dev/null
 clear
 exit
 fi
@@ -66,12 +66,12 @@ SYS_ARCH
 lat_lon=$(cat coords| head -n1)
 	if [[ -s coords ]]; then
 		echo "Coordinates found. We are looking for coordinates on the map. Wait.."
+		rm -f coords 2> /dev/null
 firefox "https://yandex.ru/maps/?mode=search&text=$lat_lon" 2> /dev/nul
 
 	else
 	echo "No coordinates found"
 sleep 2
-rm -f coords 2> /dev/null
 clear
 exit
 fi
