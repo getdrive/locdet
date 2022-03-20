@@ -35,7 +35,7 @@ SYS_ARCH
 		echo "!!!Ввод должен быть 12 символов!!!"
 		sleep 2
 		bash locdet.sh
-	
+	fi
 lat_lon=$(cat coords| head -n1)
 	if [[ -s coords ]]; then
 		echo "Координаты найдены. Ищем координаты на карте. Ждите.."
@@ -47,7 +47,6 @@ sleep 2
 rm -f coords 2> /dev/null
 clear
 exit
-fi
 fi
 }
 
@@ -63,6 +62,7 @@ SYS_ARCH
 		echo "!!!Input must be 12 characters!!!"
 		sleep 2
 		bash locdet.sh
+	fi
 lat_lon=$(cat coords| head -n1)
 	if [[ -s coords ]]; then
 		echo "Coordinates found. We are looking for coordinates on the map. Wait.."
@@ -74,7 +74,6 @@ sleep 2
 rm -f coords 2> /dev/null
 clear
 exit
-fi
 fi
 }
 CHECKLANGUAGE
