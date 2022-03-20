@@ -34,7 +34,7 @@ SYS_ARCH
 	else
 		echo "!!!Ввод должен быть 12 символов!!!"
 		sleep 2
-		bash locdet.sh
+		exit
 	fi
 lat_lon=$(cat coords| head -n1)
 	if [[ -s coords ]]; then
@@ -61,7 +61,7 @@ SYS_ARCH
 	else
 		echo "!!!Input must be 12 characters!!!"
 		sleep 2
-		bash locdet.sh
+		exit
 	fi
 lat_lon=$(cat coords| head -n1)
 	if [[ -s coords ]]; then
