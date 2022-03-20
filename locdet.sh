@@ -4,7 +4,7 @@ CHECKLANGUAGE ()
 lang=$(locale | grep LANG | cut -d= -f2 | cut -d_ -f1)
 if [ "$lang" = "ru" ];
 	then RU
-		else 
+	else 
 	ENG
 fi
 }
