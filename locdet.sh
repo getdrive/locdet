@@ -15,7 +15,7 @@ echo ""
 SYS_ARCH()
 {
 sys_arch=$(uname -m)
-	if [ "$sys_arch" = "x86_64" ]; then
+	if [ "$sys_arch" = "x86_64" ] OR [ "$sys_arch" = "amd64" ]; then
 		$PWD/geomac/geomac-x86_64 $mac|awk -F'[|]' '{print $2}'|grep " "|sed s/' '//g >coords
 	else
 		if [ "$sys_arch" = "i386" ] OR [ "$sys_arch" = "i686" ]; then
