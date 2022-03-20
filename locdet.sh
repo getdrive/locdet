@@ -65,7 +65,7 @@ SYS_ARCH
 	fi
 lat_lon=$(cat coords| head -n1)
 	if [[ -s coords ]]; then
-		echo "Coordinates found. We are looking for coordinates on the map. Wait.."
+		echo "Coordinates found. Looking for coordinates on the map. Wait for..."
 		rm -f coords 2> /dev/null
 firefox "https://yandex.ru/maps/?mode=search&text=$lat_lon" 2> /dev/nul
 
