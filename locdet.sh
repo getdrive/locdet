@@ -51,9 +51,6 @@ lat_lon=$(cat coords| head -n1)
 firefox "https://yandex.ru/maps/?mode=search&text=$lat_lon" 2> /dev/null
 	else 
 		echo "Координаты не найдены"
-
-sleep 2
-clear
 exit
 fi
 }
@@ -68,7 +65,6 @@ lengh=$(echo -n $mac | wc -c)
 SYS_ARCH
 	else
 		echo "!!!Input must be 12 characters!!!"
-		sleep 2
 		exit
 	fi
 lat_lon=$(cat coords| head -n1)
@@ -79,8 +75,6 @@ firefox "https://yandex.ru/maps/?mode=search&text=$lat_lon" 2> /dev/nul
 
 	else
 	echo "No coordinates found"
-sleep 2
-clear
 exit
 fi
 }
